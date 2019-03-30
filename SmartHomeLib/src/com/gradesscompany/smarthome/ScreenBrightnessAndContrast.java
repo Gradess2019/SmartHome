@@ -1,4 +1,4 @@
-package smarthome.Commands;
+package com.gradesscompany.smarthome;
 
 import java.io.BufferedReader;
 import java.io.IOException;

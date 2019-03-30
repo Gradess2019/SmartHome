@@ -1,4 +1,4 @@
-package com.gradesscompany.smarthome.Server;
+package com.gradesscompany.smarthome;
 
 import java.io.IOException;
 import java.net.ServerSocket;
