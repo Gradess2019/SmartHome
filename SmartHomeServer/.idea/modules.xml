@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SmartHomeClientPC/SmartHomeClient.iml" filepath="$PROJECT_DIR$/SmartHomeClientPC/SmartHomeClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SmartHomeLib/SmartHomeLib.iml" filepath="$PROJECT_DIR$/../SmartHomeLib/SmartHomeLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartHomeServer.iml" filepath="$PROJECT_DIR$/SmartHomeServer.iml" />
+    </modules>
+  </component>
+</project>
