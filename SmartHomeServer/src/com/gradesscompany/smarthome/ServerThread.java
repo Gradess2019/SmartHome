@@ -8,11 +8,15 @@ public class ServerThread extends Thread {
 	private ServerSocket serverSocket;
 	private SocketHandler socketHandler;
 
-	ServerThread(ServerSocket serverSocket, SocketHandler socketHandler) {
-		this.serverSocket = serverSocket;
-		this.socketHandler = socketHandler;
-		setDaemon(false);
-		start();
+	ServerThread(int port, SocketHandler socketHandler) {
+		try {
+			this.serverSocket = new ServerSocket(port);
+			this.socketHandler = socketHandler;
+			setDaemon(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(100);
+		}
 	}
 
 	@Override
