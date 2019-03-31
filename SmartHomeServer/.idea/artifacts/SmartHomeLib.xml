@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="SmartHomeLib">
-    <output-path>$PROJECT_DIR$/out/artifacts/SmartHomeLib</output-path>
-    <root id="archive" name="SmartHomeLib.jar">
-      <element id="module-output" name="SmartHomeLib" />
-    </root>
-  </artifact>
-</component>

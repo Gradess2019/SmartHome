@@ -1,0 +1,15 @@
+.background-unit {
+    -fx-background-color: #2B2B2B;
+}
+
+.menu-bar {
+    -fx-background-color: #3C3F41;
+}
+
+.label {
+    -fx-text-fill: #BBBBBB;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #4B6EAF;
+}
