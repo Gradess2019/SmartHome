@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
+          prefWidth="550.0" styleClass="background-unit" xmlns="http://javafx.com/javafx/8">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="300.0" minWidth="175.0" prefWidth="175.0"/>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="246.0" prefWidth="376.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="26.0" minHeight="26.0" prefHeight="26.0" valignment="TOP" vgrow="ALWAYS"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="128.0" prefHeight="237.0" valignment="BOTTOM"
+                        vgrow="ALWAYS"/>
+    </rowConstraints>
+    <MenuBar GridPane.columnSpan="2">
+        <Menu mnemonicParsing="false" text="Настройки">
+            <MenuItem mnemonicParsing="false" text="Close"/>
+            <MenuItem mnemonicParsing="false" text="Close"/>
+            <MenuItem mnemonicParsing="false" text="Close"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Сервер">
+            <MenuItem mnemonicParsing="false" styleClass="bar-background" text="Delete"/>
+        </Menu>
+    </MenuBar>
+    <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" text="Подключенные устройства" wrapText="true"
+                GridPane.rowIndex="1">
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+        <GridPane.margin>
+            <Insets/>
+        </GridPane.margin>
+        <VBox/>
+    </TitledPane>
+    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="245.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="28.0" minHeight="28.0" prefHeight="28.0" valignment="TOP" vgrow="NEVER"/>
+        </rowConstraints>
+        <GridPane.margin>
+            <Insets bottom="5.0"/>
+        </GridPane.margin>
+        <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Логи"/>
+        <GridPane GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="30.0"
+                                   prefWidth="230.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="120.0" prefWidth="60.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="120.0" prefWidth="60.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <GridPane.margin>
+                <Insets top="5.0"/>
+            </GridPane.margin>
+            <Button defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" text="Button" GridPane.columnIndex="1">
+                <GridPane.margin>
+                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                </GridPane.margin>
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+            </Button>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                    text="Button" GridPane.columnIndex="2">
+                <GridPane.margin>
+                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                </GridPane.margin>
+            </Button>
+        </GridPane>
+    </GridPane>
+</GridPane>
