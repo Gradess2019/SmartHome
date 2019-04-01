@@ -2,14 +2,64 @@
     -fx-background-color: #2B2B2B;
 }
 
-.menu-bar {
+.menu-bar, .menu-item, .titled-pane .title, .context-menu {
     -fx-background-color: #3C3F41;
 }
 
-.label {
+.label, .titled-pane, .text-area, .button {
     -fx-text-fill: #BBBBBB;
 }
 
-.menu-bar .menu:hover {
+.menu-bar .menu:hover, .menu-bar .menu:showing, .menu-item:hover, .text-area:focused {
     -fx-background-color: #4B6EAF;
+}
+
+.menu-item {
+    -fx-padding: 5px;
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-padding: 1;
+}
+
+.titled-pane {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TitledPaneSkin";
+}
+
+.titled-pane .content {
+    -fx-border-color: #3C3F41;
+}
+
+.titled-pane .title, .text-area, .text-area .content {
+    -fx-background-radius: 0px;
+}
+
+VBox {
+    -fx-background-color: #2B2B2B;
+}
+
+.text-area .content, .text-area {
+    -fx-background-color: #313335;
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-highlight-fill: #4B6EAF;
+    -fx-highlight-text-fill: #BBBBBB;
+}
+
+.button {
+    -fx-background-color: #4C5052;
+    -fx-border-color: #5E6060;
+    -fx-border-radius: 3;
+}
+
+.button:focused {
+    -fx-effect: dropshadow(one-pass-box, #466D94, 10, 0.75, 0, 0);
+}
+
+.button:default {
+    -fx-background-color: #365880;
+    -fx-border-color: #4C708C;
 }
