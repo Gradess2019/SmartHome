@@ -1,4 +1,4 @@
-package com.gradesscompany.smarthome;
+package com.gradesscompany.smarthouse;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("server_gui.fxml"));
-        primaryStage.setTitle("Hello World");
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/server_gui.fxml"));
+
+        primaryStage.setTitle("Smart house server");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }

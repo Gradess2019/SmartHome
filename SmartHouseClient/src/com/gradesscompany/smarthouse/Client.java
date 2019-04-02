@@ -1,4 +1,4 @@
-package com.gradesscompany.smarthome;
+package com.gradesscompany.smarthouse;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
