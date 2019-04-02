@@ -1,4 +1,4 @@
-package com.gradesscompany.smarthome;
+package com.gradesscompany.smarthouse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
