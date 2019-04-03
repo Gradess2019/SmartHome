@@ -3,12 +3,12 @@ package com.gradesscompany.smarthomeandroid;
 import android.os.AsyncTask;
 import android.widget.SeekBar;
 
+import com.gradesscompany.smarthouse.ScreenBrightnessAndContrast;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
-import smarthome.Commands.ScreenBrightnessAndContrast;
 
 public class BrightnessContrastSeekBarListener implements SeekBar.OnSeekBarChangeListener {
 

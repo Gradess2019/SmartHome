@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="550.0" styleClass="background-unit" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="550.0" styleClass="background-unit" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gradesscompany.smarthouse.main.MainController">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="300.0" minWidth="175.0" prefWidth="175.0" />
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="246.0" prefWidth="376.0" />
@@ -55,7 +55,7 @@
                <Insets bottom="5.0" />
            </GridPane.margin>
           <children>
-              <TextArea prefHeight="200.0" prefWidth="200.0" promptText="%key.logs" />
+              <TextArea fx:id="logArea" prefHeight="200.0" prefWidth="200.0" promptText="%key.logs" />
               <GridPane GridPane.rowIndex="1">
                   <columnConstraints>
                       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="230.0" />
@@ -69,7 +69,7 @@
                       <Insets top="5.0" />
                   </GridPane.margin>
                  <children>
-                     <Button defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="%key.start" GridPane.columnIndex="1">
+                     <Button fx:id="buttonStart" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" text="%key.start" GridPane.columnIndex="1">
                          <GridPane.margin>
                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                          </GridPane.margin>
@@ -77,7 +77,7 @@
                              <Insets />
                          </opaqueInsets>
                      </Button>
-                     <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="%key.stop" GridPane.columnIndex="2">
+                     <Button fx:id="stopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#onStopButtonClicked" text="%key.stop" GridPane.columnIndex="2">
                          <GridPane.margin>
                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                          </GridPane.margin>
