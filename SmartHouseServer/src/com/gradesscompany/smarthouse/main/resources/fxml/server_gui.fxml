@@ -20,14 +20,12 @@
               <Menu mnemonicParsing="false" text="%key.settings">
                  <items>
                      <MenuItem mnemonicParsing="false" text="%key.close" />
-                  <MenuItem mnemonicParsing="false" text="%key.close" />
-                  <MenuItem mnemonicParsing="false" text="%key.close" />
                  </items>
               </Menu>
               <Menu mnemonicParsing="false" text="%key.server">
                  <items>
-                     <MenuItem mnemonicParsing="false" styleClass="bar-background" text="%key.start" />
-                  <MenuItem mnemonicParsing="false" styleClass="bar-background" text="%key.stop" />
+                     <MenuItem mnemonicParsing="false" onAction="#onStartButtonClicked" styleClass="bar-background" text="%key.start" />
+                  <MenuItem mnemonicParsing="false" onAction="#onStopButtonClicked" styleClass="bar-background" text="%key.stop" />
                  </items>
               </Menu>
           </menus>
