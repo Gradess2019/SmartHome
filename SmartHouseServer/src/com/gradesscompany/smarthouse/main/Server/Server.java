@@ -38,7 +38,6 @@ public class Server extends Thread implements SocketHandler {
 		} else {
 			logger.putLog(TAG, "Server is alive");
 		}
-
 	}
 
 	@Override
@@ -60,7 +59,6 @@ public class Server extends Thread implements SocketHandler {
 		} else {
 			logger.putLog(TAG, "Server is stopped");
 		}
-
 	}
 
 	@Override
@@ -72,9 +70,7 @@ public class Server extends Thread implements SocketHandler {
 			} catch (IOException e) {
 				logger.putLog(TAG, "Close server socket");
 			}
-
 		}
-
 	}
 
 	@Override

@@ -10,12 +10,31 @@ public class ScreenBrightnessAndContrast extends Command {
 
 	private int brightness;
 	private int contrast;
+
 	private final String EXE_FILE_NAME = "com/gradesscompany/smarthouse/cpp/ScreenManager.exe";
 
 	@SuppressWarnings("WeakerAccess")
-	public ScreenBrightnessAndContrast(int brightness, int contrast) {
+	public ScreenBrightnessAndContrast(final int brightness, final int contrast) {
+		setupBrightnessAndContrast(brightness, contrast);
+	}
+
+	private void setupBrightnessAndContrast(final int brightness, final int contrast) {
+		setBrightness(brightness);
+		setContrast(contrast);
+	}
+
+	private void setBrightness(int brightness) {
 		this.brightness = brightness;
+	}
+
+	private void setContrast(int contrast) {
 		this.contrast = contrast;
+	}
+
+	@SuppressWarnings("unused")
+	public ScreenBrightnessAndContrast(final int senderID, final int brightness, final int contrast) {
+		super(senderID);
+		setupBrightnessAndContrast(brightness, contrast);
 	}
 
 	@Override
