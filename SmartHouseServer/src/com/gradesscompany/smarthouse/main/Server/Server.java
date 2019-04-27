@@ -14,13 +14,9 @@ public class Server extends Thread implements SocketHandler {
 
 	@SuppressWarnings("FieldCanBeLocal")
 	private final int PORT = 2546;
-
 	private static Server currentServer;
-
-	private ServerSocket serverSocket;
-
 	private final Authenticator authenticator;
-
+	private ServerSocket serverSocket;
 	private boolean isInterrupted;
 
 	private Server() {
@@ -79,7 +75,7 @@ public class Server extends Thread implements SocketHandler {
 		while (!isInterrupted()) {
 			try {
 				Socket socket = serverSocket.accept();
-				handleSocket(socket);
+				new Thread(() -> handleSocket(socket)).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -96,9 +92,7 @@ public class Server extends Thread implements SocketHandler {
 				command.execute();
 			} else if (command instanceof AddingNewDevice) {
 				command.execute();
-				if (!socket.isClosed()) {
-					sendDeviceID(socket, command);
-				}
+				sendData(socket, command.getSenderID());
 			} else {
 				sendError(socket);
 			}
@@ -112,17 +106,14 @@ public class Server extends Thread implements SocketHandler {
 		return command != null && authenticator.hasID(command.getSenderID());
 	}
 
-	private void sendDeviceID(Socket socket, Command command) throws IOException {
+	private void sendData(final Socket socket, final long data) throws IOException {
 		OutputStream socketOutputStream = socket.getOutputStream();
 		ObjectOutputStream socketObjectOutputStream = new ObjectOutputStream(socketOutputStream);
-		socketObjectOutputStream.writeLong(command.getSenderID());
-		socketObjectOutputStream.close();
+		socketObjectOutputStream.writeLong(data);
+		socketObjectOutputStream.flush();
 	}
 
 	private void sendError(Socket socket) throws IOException {
-		OutputStream socketOutputStream = socket.getOutputStream();
-		ObjectOutputStream socketObjectOutputStream = new ObjectOutputStream(socketOutputStream);
-		socketObjectOutputStream.write(ERROR_ACCESS_DENIED);
-		socketObjectOutputStream.close();
+		sendData(socket, ERROR_ACCESS_DENIED);
 	}
 }
