@@ -17,17 +17,26 @@ public class Server extends Thread implements SocketHandler {
 	private ServerSocket serverSocket;
 	private Logger logger;
 
+	private final Authenticator authenticator;
+
 	private boolean isInterrupted;
 
 	public Server(Logger logger) {
 		this.logger = logger;
+		authenticator = new Authenticator();
+
 		isInterrupted = false;
 		try {
 			serverSocket = new ServerSocket(PORT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		setDaemon(false);
+		setDaemon(true);
+
+	}
+
+	public final Authenticator getAuthenticator() {
+		return authenticator;
 	}
 
 	@Override
@@ -51,11 +60,13 @@ public class Server extends Thread implements SocketHandler {
 			super.interrupt();
 			isInterrupted = true;
 			logger.putLog(TAG, "Stop");
+
 			try {
 				serverSocket.close();
 			} catch (IOException e) {
 				logger.putLog(TAG, "Exception: " + e.getMessage());
 			}
+
 		} else {
 			logger.putLog(TAG, "Server is stopped");
 		}
@@ -76,11 +87,14 @@ public class Server extends Thread implements SocketHandler {
 	@Override
 	public void handleSocket(Socket socket) {
 		try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream())) {
+
 			Command command = (Command) objectInputStream.readObject();
+
 			if (command != null) {
 				command.execute();
 				logger.putLog(TAG, "Run client command");
 			}
+			
 		} catch (IOException | ClassNotFoundException e) {
 			logger.putLog(TAG, "Exception: " + e.getMessage());
 		}
