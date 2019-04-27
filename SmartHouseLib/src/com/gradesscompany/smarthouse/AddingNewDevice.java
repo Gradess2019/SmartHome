@@ -7,10 +7,12 @@ import javafx.scene.control.ButtonType;
 
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
 
 public class AddingNewDevice extends Command {
 
 	private String deviceName;
+	private CountDownLatch locker;
 
 	AddingNewDevice(String deviceName) {
 		this.deviceName = deviceName;
@@ -18,7 +20,9 @@ public class AddingNewDevice extends Command {
 
 	@Override
 	public void execute() {
+		locker = new CountDownLatch(1);
 		Platform.runLater(this::showDialog);
+		waitUserInput();
 	}
 
 	private void showDialog() {
@@ -27,6 +31,7 @@ public class AddingNewDevice extends Command {
 		alert.setHeaderText("New device request: " + deviceName);
 
 		handleInput(alert.showAndWait());
+		locker.countDown();
 	}
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
@@ -46,4 +51,13 @@ public class AddingNewDevice extends Command {
 			e.printStackTrace();
 		}
 	}
+
+	private void waitUserInput() {
+		try {
+			locker.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
