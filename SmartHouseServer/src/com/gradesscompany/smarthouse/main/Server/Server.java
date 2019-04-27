@@ -1,29 +1,30 @@
 package com.gradesscompany.smarthouse.main.Server;
 
+import com.gradesscompany.smarthouse.AddingNewDevice;
 import com.gradesscompany.smarthouse.Command;
-import com.gradesscompany.smarthouse.main.Logger;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class Server extends Thread implements SocketHandler {
-	private static final String TAG = "Server: ";
+
+	public static final int ERROR_ACCESS_DENIED = 1;
 
 	@SuppressWarnings("FieldCanBeLocal")
 	private final int PORT = 2546;
 
+	private static Server currentServer;
+
 	private ServerSocket serverSocket;
-	private Logger logger;
 
 	private final Authenticator authenticator;
 
 	private boolean isInterrupted;
 
-	public Server(Logger logger) {
-		this.logger = logger;
-		authenticator = new Authenticator();
+	private Server() {
+		this.authenticator = new Authenticator();
 
 		isInterrupted = false;
 		try {
@@ -32,20 +33,25 @@ public class Server extends Thread implements SocketHandler {
 			e.printStackTrace();
 		}
 		setDaemon(true);
-
 	}
 
 	public final Authenticator getAuthenticator() {
 		return authenticator;
 	}
 
+	public static Server createNewServer() {
+		currentServer = new Server();
+		return currentServer;
+	}
+
+	public static Server getCurrentServer() {
+		return currentServer;
+	}
+
 	@Override
 	public synchronized void start() {
 		if (!isAlive() && !isInterrupted()) {
 			super.start();
-			logger.putLog(TAG, "Start");
-		} else {
-			logger.putLog(TAG, "Server is alive");
 		}
 	}
 
@@ -59,16 +65,12 @@ public class Server extends Thread implements SocketHandler {
 		if (isAlive()) {
 			super.interrupt();
 			isInterrupted = true;
-			logger.putLog(TAG, "Stop");
 
 			try {
 				serverSocket.close();
 			} catch (IOException e) {
-				logger.putLog(TAG, "Exception: " + e.getMessage());
+				e.printStackTrace();
 			}
-
-		} else {
-			logger.putLog(TAG, "Server is stopped");
 		}
 	}
 
@@ -79,7 +81,7 @@ public class Server extends Thread implements SocketHandler {
 				Socket socket = serverSocket.accept();
 				handleSocket(socket);
 			} catch (IOException e) {
-				logger.putLog(TAG, "Close server socket");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -90,13 +92,37 @@ public class Server extends Thread implements SocketHandler {
 
 			Command command = (Command) objectInputStream.readObject();
 
-			if (command != null) {
+			if (isSafeCommand(command)) {
 				command.execute();
-				logger.putLog(TAG, "Run client command");
+			} else if (command instanceof AddingNewDevice) {
+				command.execute();
+				if (!socket.isClosed()) {
+					sendDeviceID(socket, command);
+				}
+			} else {
+				sendError(socket);
 			}
-			
-		} catch (IOException | ClassNotFoundException e) {
-			logger.putLog(TAG, "Exception: " + e.getMessage());
+
+		} catch (IOException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 		}
+	}
+
+	private boolean isSafeCommand(Command command) throws SQLException {
+		return command != null && authenticator.hasID(command.getSenderID());
+	}
+
+	private void sendDeviceID(Socket socket, Command command) throws IOException {
+		OutputStream socketOutputStream = socket.getOutputStream();
+		ObjectOutputStream socketObjectOutputStream = new ObjectOutputStream(socketOutputStream);
+		socketObjectOutputStream.writeLong(command.getSenderID());
+		socketObjectOutputStream.close();
+	}
+
+	private void sendError(Socket socket) throws IOException {
+		OutputStream socketOutputStream = socket.getOutputStream();
+		ObjectOutputStream socketObjectOutputStream = new ObjectOutputStream(socketOutputStream);
+		socketObjectOutputStream.write(ERROR_ACCESS_DENIED);
+		socketObjectOutputStream.close();
 	}
 }

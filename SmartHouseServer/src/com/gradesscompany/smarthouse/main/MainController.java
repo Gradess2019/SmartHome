@@ -13,7 +13,7 @@ public class MainController implements Logger {
 
 	public void onStartButtonClicked() {
 		if (server == null || server.isInterrupted()) {
-			server = new Server(this);
+			server = Server.createNewServer();
 		}
 
 		server.start();

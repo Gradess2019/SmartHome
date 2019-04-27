@@ -14,7 +14,7 @@ public class Authenticator {
 	private String userName;
 	private String password;
 
-	public Authenticator() {
+	Authenticator() {
 		loadConfiguration();
 	}
 
@@ -56,13 +56,15 @@ public class Authenticator {
 		return Math.abs(random.nextLong());
 	}
 
-	public void removeFromAuthorizedDevices(long deviceID) throws SQLException {
+	public boolean removeFromAuthorizedDevices(long deviceID) throws SQLException {
 		PreparedStatement statement = getPreparedStatement();
-		statement.executeUpdate("delete from authorizeddevices where deviceID = " + deviceID + "");
+		int result = statement.executeUpdate("delete from authorizeddevices where deviceID = " + deviceID + "");
 		statement.close();
+
+		return result != 0;
 	}
 
-	public boolean hasID(final long deviceID) throws SQLException {
+	boolean hasID(final long deviceID) throws SQLException {
 		PreparedStatement statement = getPreparedStatement();
 		ResultSet queryResult = statement.executeQuery("select deviceID from authorizeddevices where deviceID = " + deviceID + "");
 

@@ -2,20 +2,25 @@ package com.gradesscompany.smarthouse;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public abstract class Command implements Serializable {
 
-	private final int senderID;
+	private long senderID;
 
-	public Command() {
+	Command() {
 		senderID = -1;
 	}
 
-	public Command(final int senderID) {
+	Command(final long senderID) {
 		this.senderID = senderID;
 	}
 
-	public int getsenderID() {
+	public long getSenderID() {
 		return senderID;
+	}
+
+	void setSenderID(long newID) {
+		senderID = newID;
 	}
 
 	public abstract void execute();
