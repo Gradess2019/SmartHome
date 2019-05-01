@@ -14,7 +14,8 @@ public class ScreenBrightnessAndContrast extends Command {
 	private final String EXE_FILE_NAME = "com/gradesscompany/smarthouse/cpp/ScreenManager.exe";
 
 	@SuppressWarnings("WeakerAccess")
-	public ScreenBrightnessAndContrast(final int brightness, final int contrast) {
+	public ScreenBrightnessAndContrast(final long senderID, final int brightness, final int contrast) {
+		super(senderID);
 		setupBrightnessAndContrast(brightness, contrast);
 	}
 
